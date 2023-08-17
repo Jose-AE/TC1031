@@ -1,5 +1,7 @@
 #include <iostream>
 
+// binary sort
+
 int main() {
    int find = 2;
    int arr[] = {1, 2, 3, 5};
