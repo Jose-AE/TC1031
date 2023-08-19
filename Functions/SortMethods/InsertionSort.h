@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Functions/SwitchArrayValues.h"
+#include "../Utils/SwitchArrayValues.h"
 
 void InsertionSort(int arr[], int size) {
 

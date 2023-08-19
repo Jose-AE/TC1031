@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Functions/SwitchArrayValues.h"
+#include "../Utils/SwitchArrayValues.h"
 
 void SelectionSort(int arr[], int size) {
    for (int i = 0; i < size; i++) {
