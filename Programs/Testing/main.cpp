@@ -1,17 +1,14 @@
-#include "../../Functions/SortMethods/InsertionSort.h"
+// #include "../../Functions/SortMethods/BubbleSort.h"
+#include "../../Functions/SortMethods/BubbleSort.h"
 #include "../../Functions/Utils/PrintArray.h"
-
-void printSize(int& num) { cout << num; }
+#include "../../Functions/Utils/SwitchArrayValues.h"
 
 int main(int argc, char const* argv[]) {
    int arr[] = {5, 5, 9, 3, 4, 2};
 
-   // InsertionSort(arr, 6);
-   // PrintArray(arr, 6);
+   BubbleSort(arr, 6);
 
-   int num = 5;
-
-   printSize(num);
+   PrintArray(arr, 6);
 
    return 0;
 }
