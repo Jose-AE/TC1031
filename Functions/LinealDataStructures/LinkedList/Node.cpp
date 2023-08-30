@@ -1,11 +1,24 @@
-#include "Node.h"
+// #include "Node.h"
 
-Node::Node(int data) : data(data), next(nullptr) {}
+// template <typename T>
+// Node<T>::Node(T data) : data(data), next(nullptr) {}
 
-Node* Node::getNext() { return next; }
+// template <typename T>
+// Node<T>& Node<T>::getNext() {
+//    return next;
+// }
 
-int& Node::getData() { return data; }
+// template <typename T>
+// T& Node<T>::getData() {
+//    return data;
+// }
 
-void Node::setData(int data) { this->data = data; }
+// template <typename T>
+// void Node<T>::setNext(Node* next) {
+//    this->next = next;
+// }
 
-void Node::setNext(Node* node) { this->next = next; }
+// template <typename T>
+// void Node<T>::setData(T data) {
+//    this->data = data;
+// }

@@ -1,19 +1,30 @@
-#include "LinkedList.h"
+// #include "LinkedList.h"
+// #include <stdexcept>
 
-LinkedList::LinkedList() { first = nullptr; }
+// template <typename T>
+// LinkedList<T>::LinkedList(T firstVal) : first(new Node<T>(firstVal)) {}
 
-int& LinkedList::operator[](int index) {
+// template <typename T>
+// void LinkedList<T>::Append(T&& data) {
+//    length++;
+//    Node<T>& nextNode = first;
+//    while (nextNode.getNext() != nullptr) {
+//       nextNode = nextNode.getNext();
+//    }
+//    nextNode.setData(data);
+// }
 
-   int counter = 0;
-   Node* temp;
-   temp = first;
+// template <typename T>
+// T& LinkedList<T>::operator[](int index) {
+//    if (index > length) throw runtime_error("Index is out of range");
 
-   while (counter < index) {
-      counter++;
-      temp = temp->getNext();
-   }
+//    int counter = 0;
+//    Node<T>& nextNode = first;
+//    for (int i = 0; i < index; i++) {
+//       nextNode = nextNode.getNext();
+//    }
 
-   return temp->getData();
-}
+//    delete counter;
 
-void LinkedList::Append(int data) {}
+//    return nextNode.getData();
+// }
