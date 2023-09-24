@@ -2,21 +2,7 @@
 #include <iostream>
 #include <string>
 #include "../../../Functions/LinealDataStructures/LinkedList/LinkedList.h"
-
-void Sort(LinkedList<string> list) {
-   bool sorted = false;
-
-   while (!sorted) {
-      sorted = false;
-      for (int i = 0; i < list.getLength(); i++) {
-
-         if (list[i] > list[i + 1 < list.getLength() ? i + 1 : 0]) {
-            list.Switch(i, i + 1 < list.getLength() ? i + 1 : 0);
-            sorted = false;
-         }
-      }
-   }
-}
+#include "../../../Functions/SortMethods/QuickSort.h"
 
 int main(int argc, char const *argv[]) {
 
@@ -32,10 +18,26 @@ int main(int argc, char const *argv[]) {
       newfile.close();
    }
 
-   Sort(list);
+   LinkedList<int> intlist;
+   intlist.Insert(1);
+   intlist.Insert(2);
+   intlist.Insert(3);
+   intlist.Insert(2);
+   intlist.Insert(7);
+   intlist.Insert(5);
+   intlist.Insert(9);
+   intlist.Insert(4);
+   intlist.Insert(8);
+   intlist.Insert(15);
+   intlist.Insert(6);
+   intlist.Insert(10);
 
-   for (int i = 0; i < list.getLength(); i++) {
-      cout << list[i] << endl;
+   intlist.Swap(0, 1);
+
+   QuickSort(intlist, 0, intlist.getLength() - 1);
+
+   for (int i = 0; i < intlist.getLength(); i++) {
+      cout << intlist[i] << endl;
    }
 
    return 0;

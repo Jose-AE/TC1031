@@ -11,14 +11,17 @@ class LinkedList {
   private:
    Node<T>* first;
    int length = 0;
+   void SortPartition(int startIndex, int endIndex);
 
   public:
    LinkedList();
+   void QuickSort();
+
    T& operator[](int index);
 
    void Insert(T data, int index = -1);
    int getLength();
-   void Switch(int i1, int i2);
+   void Swap(int i1, int i2);
 };
 
 // implem
@@ -31,25 +34,13 @@ int LinkedList<T>::getLength() {
 }
 
 template <typename T>
-inline void LinkedList<T>::Switch(int i1, int i2) {
-   if (i1 > (length - 1) || i2 > (length - 1))
-      throw runtime_error("Index is out of range");
+inline void LinkedList<T>::Swap(int i1, int i2) {
+   // if (i1 > (length - 1) || i2 > (length - 1) || (i1 < -1 || i2 < -1))
+   //    throw runtime_error("Index is out of range");
 
-   Node<T>* firstNode = first;
-   Node<T>* secondtNode = first;
-
-   for (int i = 0; i < (i1 + 1); i++) {
-      firstNode = firstNode->getNext();
-   }
-
-   for (int i = 0; i < (i2 + 1); i++) {
-      secondtNode = secondtNode->getNext();
-   }
-
-   T temp = firstNode->getData();
-
-   firstNode->setData(secondtNode->getData());
-   secondtNode->setData(temp);
+   T temp = (*this)[i1];  // Assuming (*this)[i1] returns an integer.
+   (*this)[i1] = (*this)[i2];
+   (*this)[i2] = temp;
 }
 
 template <typename T>

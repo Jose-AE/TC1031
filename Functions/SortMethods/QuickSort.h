@@ -1,9 +1,34 @@
 #pragma once
 
+#include "../LinealDataStructures/LinkedList/LinkedList.h"
 #include "../Utils/SwitchArrayValues.h"
 
-// split sarrays recursivley,
-void QuickSort(int arr[], int start, int end) {
+template <typename T>
+void QuickSort(LinkedList<T> list, int start, int end) {
 
-   // choose random pivot(is element not index)
+   if (end <= start) return;
+
+   // Find new pivot
+   int pivot = list[end];
+   int i = start - 1;
+
+   for (int j = start; j < end; j++) {
+      if (list[j] < pivot) {
+         i++;
+         list.Swap(i, j);
+      }
+   }
+   i++;
+   list.Swap(end, i);
+   //
+
+   // run quick sort on left and right of pivot
+   QuickSort(list, start, i - 1);
+   QuickSort(list, i + 1, end);
+
+   // choose last index for pivot
+
+   // IF j is smaller than pivot increment i and swaap vaalues in j aand i
+
+   // repeat until j reaches pivot, move i +1 aand  swap pivot with i
 }
