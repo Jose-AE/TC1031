@@ -9,7 +9,7 @@ void QuickSort(LinkedList<T> list, int start, int end) {
    if (end <= start) return;
 
    // Find new pivot
-   int pivot = list[end];
+   T pivot = list[end];
    int i = start - 1;
 
    for (int j = start; j < end; j++) {
