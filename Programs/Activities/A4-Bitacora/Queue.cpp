@@ -1,26 +1,29 @@
-#include "Stack.h"
+#include "Queue.h"
 #include <iostream>
 
 template <typename T>
-Stack<T>::Stack() {
+Queue<T>::Queue() {
    first = nullptr;
 }
 template <typename T>
-void Stack<T>::push(Node<T> *node) {
+void Queue<T>::enque(Node_Queue<T> *node) {
    if (first == nullptr) {
       first = node;
    } else {
-      node->setNext(first);
-      first = node;
+      Node_Queue<T> *temp = first;
+      while (temp->getNext() != nullptr) {
+         temp = temp->getNext();
+      }
+      temp->setNext(node);
    }
 }
 
 template <typename T>
-void Stack<T>::print() {
+void Queue<T>::print() {
    if (first == nullptr) {
       cout << "Empty Stack" << endl;
    } else {
-      Node<T> *temp = first;
+      Node_Queue<T> *temp = first;
       while (temp != nullptr) {
          cout << temp->getData() << endl;
          temp = temp->getNext();
@@ -29,7 +32,7 @@ void Stack<T>::print() {
 }
 
 template <typename T>
-void Stack<T>::pop() {
+void Queue<T>::deque() {
    if (first == nullptr) {
       cout << "Empty Stack" << endl;
    } else {
@@ -37,8 +40,9 @@ void Stack<T>::pop() {
    }
 }
 template <typename T>
-Node<T> *Stack<T>::top() {
+Node_Queue<T> *Queue<T>::getFirst() {
    return first;
 }
 
-template class Stack<int>;
+template class Queue<int>;
+template class Queue<string>;

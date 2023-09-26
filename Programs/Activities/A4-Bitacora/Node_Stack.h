@@ -1,17 +1,16 @@
 #pragma once
-
 using namespace std;
 template <typename T>
-class Node {
+class Node_Stack {
   private:
    T data;
-   Node* next;
+   Node_Stack* next;
 
   public:
-   Node(T value);
+   Node_Stack(T value);
 
    T getData();
    void setData(T value);
-   Node* getNext();
-   void setNext(Node* node);
+   Node_Stack* getNext();
+   void setNext(Node_Stack* node);
 };
