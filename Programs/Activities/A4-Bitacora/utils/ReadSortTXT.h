@@ -31,13 +31,13 @@ void ReadSortTXT() {
    cout << "\nInput end IP:  ";
    cin >> end;
 
-   start = "998.94.195.38:416";
-   end = "995.50.337.89:553";
+   // start = "909.95.412.60:5908";
+   // end = "910.95.412.60:5908";
 
    // save range in new txt
    newfile.open("data/sorted_bitacora.txt", ios::out);
    for (int i = 0; i < list.getLength(); i++) {
-      if (start >= list[i].getIP() && list[i].getIP() <= end) {
+      if (end > list[i].getIP() && list[i].getIP() >= start) {
          newfile << list[i].getData() << endl;
       }
    }

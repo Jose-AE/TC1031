@@ -1,6 +1,6 @@
 #include <iostream>
 
-int main() {
+int maisn() {
    int var1 = 42;
    int& test1 = var1;
 
