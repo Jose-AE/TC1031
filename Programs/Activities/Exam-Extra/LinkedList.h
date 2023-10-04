@@ -99,7 +99,7 @@ int LinkedList<T>::getLength() {
 }
 
 template <typename T>
-inline void LinkedList<T>::Swap(int index1, int index2) {
+void LinkedList<T>::Swap(int index1, int index2) {
    T temp = this->getNodePtrAtAindex(index1)->getData();
 
    getNodePtrAtAindex(index1)->setData(getNodePtrAtAindex(index2)->getData());

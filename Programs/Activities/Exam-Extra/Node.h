@@ -18,35 +18,35 @@ class Node {
 };
 
 template <typename T>
-inline Node<T>::Node(T data, Node<T>* prevNodePtr, Node<T>* nextNodePtr)
+Node<T>::Node(T data, Node<T>* prevNodePtr, Node<T>* nextNodePtr)
     : data(data), prevNodePtr(prevNodePtr), nextNodePtr(nextNodePtr) {}
 
 template <typename T>
-inline Node<T>* Node<T>::getNextNodePtr() {
+Node<T>* Node<T>::getNextNodePtr() {
    return nextNodePtr;
 }
 
 template <typename T>
-inline Node<T>* Node<T>::getPrevNodePtr() {
+Node<T>* Node<T>::getPrevNodePtr() {
    return prevNodePtr;
 }
 
 template <typename T>
-inline T Node<T>::getData() {
+T Node<T>::getData() {
    return data;
 }
 
 template <typename T>
-inline void Node<T>::setNextNodePtr(Node<T>* nextNode) {
+void Node<T>::setNextNodePtr(Node<T>* nextNode) {
    nextNodePtr = nextNode;
 }
 
 template <typename T>
-inline void Node<T>::setPrevNodePtr(Node<T>* prevNode) {
+void Node<T>::setPrevNodePtr(Node<T>* prevNode) {
    prevNodePtr = prevNode;
 }
 
 template <typename T>
-inline void Node<T>::setData(T data) {
+void Node<T>::setData(T data) {
    this->data = data;
 }
