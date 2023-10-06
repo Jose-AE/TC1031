@@ -466,3 +466,41 @@ Class Queue:
 ```
 
 </blockquote>
+
+
+<blockquote>
+
+<b>Deque</b>
+
+<img src="https://learnersbucket.com/wp-content/uploads/2019/08/Deque-Data-Structure-1.png" alt="drawing" width="400"/>
+
+```
+class Deque:
+    // Initialize an empty deque
+    function Deque():
+        create an empty list or array
+
+    // Add an element to the front of the deque
+    function addFront(item):
+        insert item at the beginning of the deque
+
+    // Add an element to the back of the deque
+    function addBack(item):
+        insert item at the end of the deque
+
+    // Remove and return the element from the front of the deque
+    function removeFront():
+        if not isEmpty():
+            remove and return the first element of the deque
+        else:
+            raise an exception or return an error
+
+    // Remove and return the element from the back of the deque
+    function removeBack():
+        if not isEmpty():
+            remove and return the last element of the deque
+        else:
+            raise an exception or return an error
+```
+
+</blockquote>
