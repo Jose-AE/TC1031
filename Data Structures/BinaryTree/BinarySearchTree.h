@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Node.h"
 
+using namespace std;
 template <typename T>
 class BinarySearchTree {
   private:
@@ -11,13 +12,5 @@ class BinarySearchTree {
    BinarySearchTree();
    void Insert(T data, Node<T>* tempRoot = nullptr);
    Node<T>* getRootPtr();
-
-   void Print() { InOrderTraversal(root); }
-   void InOrderTraversal(Node<T>* node) {
-      if (node != nullptr) {
-         InOrderTraversal(node->getLeftNodePtr());
-         std::cout << node->getData() << " ";
-         InOrderTraversal(node->getRightNodePtr());
-      }
-   }
+   void Print(Node<T>* tempRoot = nullptr);
 };

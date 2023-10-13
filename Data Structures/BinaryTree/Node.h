@@ -9,9 +9,11 @@ class Node {
 
   public:
    Node();
-   Node(T data, Node<T>* leftNodePtr, Node<T>* rightNodePtr);
+   Node(T data, Node<T>* leftNodePtr = nullptr,
+        Node<T>* rightNodePtr = nullptr);
 
    T getData();
+   void setData(T data);
    Node<T>* getRightNodePtr();
    Node<T>* getLeftNodePtr();
    void setLeftNodePtr(Node<T>* node);
