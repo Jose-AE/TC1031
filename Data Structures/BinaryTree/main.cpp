@@ -7,9 +7,13 @@ int main(int argc, char const *argv[]) {
    tree.Insert(1);
    tree.Insert(2);
    tree.Insert(3);
-   // tree.Print();
+   tree.Print();
 
-   tree.getRootPtr()->Print();
+   // if (tree.getRootPtr()->getLeftNodePtr() != nullptr) {
+   //    cout << tree.getRootPtr()->getLeftNodePtr()->getData() << endl;
+
+   // } else
+   //    cout << "nullp";
 
    // cout << "┌─┴─┐";
 

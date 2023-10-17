@@ -13,28 +13,38 @@ void BinarySearchTree<T>::Insert(T data, Node<T>* tempRoot) {
       this->root = new Node<T>(data);
       return;
    }
-   if (tempRoot == nullptr) tempRoot = this->root;
+   if (tempRoot == nullptr) {
+      tempRoot = this->root;
+   };
 
-   if (data < tempRoot->getData() && tempRoot->getLeftNodePtr() != nullptr) {
-      // send left
-      Insert(data, tempRoot->getLeftNodePtr());
-   } else {
-      // insert left
-      tempRoot->setLeftNodePtr(new Node<T>(data));
+   // if should send left
+   if (data < tempRoot->getData()) {
+
+      if (tempRoot->getLeftNodePtr() != nullptr) {
+         // recurse left
+         Insert(data, tempRoot->getLeftNodePtr());
+      } else {
+         // insert left
+         tempRoot->setLeftNodePtr(new Node<T>(data));
+      }
    }
 
-   if (data > tempRoot->getData() && tempRoot->getRightNodePtr() != nullptr) {
-      // send right
-      Insert(data, tempRoot->getRightNodePtr());
-   } else {
-      // insert on right
-      tempRoot->setRightNodePtr(new Node<T>(data));
+   // if should send right
+   if (data > tempRoot->getData()) {
+
+      if (tempRoot->getRightNodePtr() != nullptr) {
+         // recurse right
+         Insert(data, tempRoot->getRightNodePtr());
+      } else {
+         // insert rigth
+         tempRoot->setRightNodePtr(new Node<T>(data));
+      }
    }
 }
 
 template <typename T>
 Node<T>* BinarySearchTree<T>::getRootPtr() {
-   return nullptr;
+   return root;
 }
 
 template <typename T>
