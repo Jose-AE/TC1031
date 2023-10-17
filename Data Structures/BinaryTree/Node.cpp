@@ -1,4 +1,6 @@
 #include "Node.h"
+#include <iostream>
+using namespace std;
 
 template <typename T>
 Node<T>::Node() {}
@@ -35,6 +37,13 @@ void Node<T>::setLeftNodePtr(Node<T>* node) {
 template <typename T>
 void Node<T>::setRightNodePtr(Node<T>* node) {
    rightNodePtr = node;
+}
+
+template <typename T>
+void Node<T>::Print() {
+   cout << "Data: " << data;
+   cout << "LeftPtr: " << leftNodePtr;
+   cout << "RightPtr: " << rightNodePtr;
 }
 
 template class Node<int>;

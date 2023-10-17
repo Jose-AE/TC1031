@@ -10,7 +10,9 @@ class BinarySearchTree {
 
   public:
    BinarySearchTree();
+   void printVisual(Node<T>* root, std::string indent, std::string parent_dir);
    void Insert(T data, Node<T>* tempRoot = nullptr);
    Node<T>* getRootPtr();
-   void Print(Node<T>* tempRoot = nullptr);
+   void Print(string prefix, Node<T>* node, bool isLeft);
+   void Print();
 };

@@ -1,21 +1,22 @@
 
 #include "BinarySearchTree.h"
+#include <queue>
 
 template <typename T>
-inline BinarySearchTree<T>::BinarySearchTree() {}
+inline BinarySearchTree<T>::BinarySearchTree() {
+   this->root = nullptr;
+}
 
 template <typename T>
 void BinarySearchTree<T>::Insert(T data, Node<T>* tempRoot) {
-   cout << "insert" << endl;
    if (this->root == nullptr) {
-      root->setData(data);
+      this->root = new Node<T>(data);
       return;
    }
    if (tempRoot == nullptr) tempRoot = this->root;
 
    if (data < tempRoot->getData() && tempRoot->getLeftNodePtr() != nullptr) {
       // send left
-      cout << "send left" << endl;
       Insert(data, tempRoot->getLeftNodePtr());
    } else {
       // insert left
@@ -24,7 +25,6 @@ void BinarySearchTree<T>::Insert(T data, Node<T>* tempRoot) {
 
    if (data > tempRoot->getData() && tempRoot->getRightNodePtr() != nullptr) {
       // send right
-      cout << "send right" << endl;
       Insert(data, tempRoot->getRightNodePtr());
    } else {
       // insert on right
@@ -38,17 +38,25 @@ Node<T>* BinarySearchTree<T>::getRootPtr() {
 }
 
 template <typename T>
-void BinarySearchTree<T>::Print(Node<T>* tempRoot) {
-   cout << "hola";
-   if (tempRoot == nullptr) tempRoot = this->root;
+void BinarySearchTree<T>::Print(string prefix, Node<T>* node, bool isLeft) {
+   if (node != nullptr) {
+      cout << prefix;
 
-   cout << tempRoot->getData();
-   // print left
-   if (tempRoot->getLeftNodePtr() != nullptr) Print(tempRoot->getLeftNodePtr());
+      cout << (isLeft ? "|--" : "|--");  // └──
 
-   // print right
-   if (tempRoot->getRightNodePtr() != nullptr)
-      Print(tempRoot->getRightNodePtr());
+      // print the value of the node
+      cout << node->getData() << std::endl;
+
+      // enter the next tree level - left and right branch
+      Print(prefix + (isLeft ? "│   " : "    "), node->getLeftNodePtr(), true);
+      Print(prefix + (isLeft ? "│   " : "    "), node->getRightNodePtr(),
+            false);
+   }
+}
+
+template <typename T>
+void BinarySearchTree<T>::Print() {
+   Print("", root, false);
 }
 
 // Templates

@@ -18,4 +18,5 @@ class Node {
    Node<T>* getLeftNodePtr();
    void setLeftNodePtr(Node<T>* node);
    void setRightNodePtr(Node<T>* node);
+   void Print();
 };
