@@ -6,7 +6,7 @@ using namespace std;
 template <typename T>
 class BinarySearchTree {
   private:
-   Node<T>* root;
+   Node<T>* root = nullptr;
 
   public:
    BinarySearchTree();

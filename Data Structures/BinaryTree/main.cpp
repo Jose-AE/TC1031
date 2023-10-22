@@ -1,12 +1,16 @@
 #include <iostream>
+#include "AVLTree.h"
 #include "BinarySearchTree.h"
 using namespace std;
 int main(int argc, char const *argv[]) {
-   BinarySearchTree<int> tree;
+   AVLTree<int> tree;
 
    tree.Insert(1);
    tree.Insert(2);
    tree.Insert(3);
+   tree.Insert(-1);
+   tree.Insert(-2);
+
    tree.Print();
 
    // if (tree.getRootPtr()->getLeftNodePtr() != nullptr) {

@@ -3,9 +3,7 @@
 #include <queue>
 
 template <typename T>
-inline BinarySearchTree<T>::BinarySearchTree() {
-   this->root = nullptr;
-}
+inline BinarySearchTree<T>::BinarySearchTree() {}
 
 template <typename T>
 void BinarySearchTree<T>::Insert(T data, Node<T>* tempRoot) {
@@ -52,20 +50,21 @@ void BinarySearchTree<T>::Print(string prefix, Node<T>* node, bool isLeft) {
    if (node != nullptr) {
       cout << prefix;
 
-      cout << (isLeft ? "|--" : "|--");  // └──
+      cout << (isLeft ? "|--[" : "|--[");  // └──
 
       // print the value of the node
       cout << node->getData() << std::endl;
 
       // enter the next tree level - left and right branch
-      Print(prefix + (isLeft ? "│   " : "    "), node->getLeftNodePtr(), true);
-      Print(prefix + (isLeft ? "│   " : "    "), node->getRightNodePtr(),
+      Print(prefix + (isLeft ? "|   " : "    "), node->getLeftNodePtr(), true);
+      Print(prefix + (isLeft ? "|   " : "    "), node->getRightNodePtr(),
             false);
    }
 }
 
 template <typename T>
 void BinarySearchTree<T>::Print() {
+   cout << "\nHeight: " << root->getHeight() << "\n\n";
    Print("", root, false);
 }
 

@@ -46,4 +46,23 @@ void Node<T>::Print() {
    cout << "RightPtr: " << rightNodePtr;
 }
 
+template <typename T>
+int Node<T>::getHeight() {
+
+   // if single node
+   if (leftNodePtr == nullptr && rightNodePtr == nullptr) {
+      return 0;
+   }
+   // if there are 2 child nodes (L and R)
+   else if (leftNodePtr != nullptr && rightNodePtr != nullptr) {
+      return max(leftNodePtr->getHeight(), rightNodePtr->getHeight()) + 1;
+   }
+   // if only one child node
+   else {
+      int child_height = (leftNodePtr != nullptr ? leftNodePtr->getHeight()
+                                                 : rightNodePtr->getHeight());
+      return child_height + 1;
+   }
+}
+
 template class Node<int>;

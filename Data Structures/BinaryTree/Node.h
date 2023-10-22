@@ -4,8 +4,8 @@ template <typename T>
 class Node {
   private:
    T data;
-   Node<T>* leftNodePtr;
-   Node<T>* rightNodePtr;
+   Node<T>* leftNodePtr = nullptr;
+   Node<T>* rightNodePtr = nullptr;
 
   public:
    Node();
@@ -19,4 +19,6 @@ class Node {
    void setLeftNodePtr(Node<T>* node);
    void setRightNodePtr(Node<T>* node);
    void Print();
+
+   int getHeight();
 };
