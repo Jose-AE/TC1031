@@ -5,11 +5,19 @@
 template <typename T>
 inline BinarySearchTree<T>::BinarySearchTree() {}
 
+/**
+ * @brief Inserts a node with the given data into the tree
+ * @param data Data to be inserted
+ * @param tempRoot Parent root used for recursion (default = tree.root)
+ * @return Pointer to the Node that was created to insert data
+ */
 template <typename T>
-void BinarySearchTree<T>::Insert(T data, Node<T>* tempRoot) {
+Node<T>* BinarySearchTree<T>::Insert(T data, Node<T>* tempRoot) {
+   Node<T>* newNode;
+
    if (this->root == nullptr) {
-      this->root = new Node<T>(data);
-      return;
+      newNode = new Node<T>(data, nullptr);
+      this->root = newNode;
    }
    if (tempRoot == nullptr) {
       tempRoot = this->root;
@@ -23,7 +31,8 @@ void BinarySearchTree<T>::Insert(T data, Node<T>* tempRoot) {
          Insert(data, tempRoot->getLeftNodePtr());
       } else {
          // insert left
-         tempRoot->setLeftNodePtr(new Node<T>(data));
+         newNode = new Node<T>(data);
+         tempRoot->setLeftNodePtr(newNode);
       }
    }
 
@@ -35,14 +44,22 @@ void BinarySearchTree<T>::Insert(T data, Node<T>* tempRoot) {
          Insert(data, tempRoot->getRightNodePtr());
       } else {
          // insert rigth
-         tempRoot->setRightNodePtr(new Node<T>(data));
+         newNode = new Node<T>(data);
+         tempRoot->setRightNodePtr(newNode);
       }
    }
+
+   return newNode;
 }
 
 template <typename T>
 Node<T>* BinarySearchTree<T>::getRootPtr() {
    return root;
+}
+
+template <typename T>
+void BinarySearchTree<T>::setRootPtr(Node<T>* node) {
+   root = node;
 }
 
 template <typename T>

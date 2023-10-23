@@ -47,8 +47,20 @@ void Node<T>::Print() {
 }
 
 template <typename T>
-int Node<T>::getHeight() {
+int Node<T>::getBalanceFactor() {
+   int balanceFacor = 0;  // L-R
+   if (this->getLeftNodePtr() != nullptr) {
+      balanceFacor += this->getLeftNodePtr()->getHeight() + 1;
+   }
+   if (this->getRightNodePtr() != nullptr) {
+      balanceFacor -= this->getRightNodePtr()->getHeight() + 1;
+   }
 
+   return balanceFacor;
+}
+
+template <typename T>
+int Node<T>::getHeight() {
    // if single node
    if (leftNodePtr == nullptr && rightNodePtr == nullptr) {
       return 0;
@@ -65,4 +77,5 @@ int Node<T>::getHeight() {
    }
 }
 
+/// templates
 template class Node<int>;

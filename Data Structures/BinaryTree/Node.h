@@ -20,5 +20,7 @@ class Node {
    void setRightNodePtr(Node<T>* node);
    void Print();
 
+   int getBalanceFactor();
+
    int getHeight();
 };

@@ -5,11 +5,13 @@ using namespace std;
 int main(int argc, char const *argv[]) {
    AVLTree<int> tree;
 
-   tree.Insert(1);
-   tree.Insert(2);
-   tree.Insert(3);
-   tree.Insert(-1);
-   tree.Insert(-2);
+   int numbersToInsert[] = {1, 2, 3, 4, 5};  //{10, 15, 20, 12, 5}
+
+   for (int number : numbersToInsert) {
+      tree.Insert(number);
+   }
+
+   // tree.setRootPtr(tree.leftRotate(tree.getRootPtr()));
 
    tree.Print();
 
