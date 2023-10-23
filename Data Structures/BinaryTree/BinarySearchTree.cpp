@@ -16,7 +16,7 @@ Node<T>* BinarySearchTree<T>::Insert(T data, Node<T>* tempRoot) {
    Node<T>* newNode;
 
    if (this->root == nullptr) {
-      newNode = new Node<T>(data, nullptr);
+      newNode = new Node<T>(data, nullptr, false);
       this->root = newNode;
    }
    if (tempRoot == nullptr) {
@@ -28,10 +28,10 @@ Node<T>* BinarySearchTree<T>::Insert(T data, Node<T>* tempRoot) {
 
       if (tempRoot->getLeftNodePtr() != nullptr) {
          // recurse left
-         Insert(data, tempRoot->getLeftNodePtr());
+         return Insert(data, tempRoot->getLeftNodePtr());
       } else {
          // insert left
-         newNode = new Node<T>(data);
+         newNode = new Node<T>(data, tempRoot, true);
          tempRoot->setLeftNodePtr(newNode);
       }
    }
@@ -41,10 +41,10 @@ Node<T>* BinarySearchTree<T>::Insert(T data, Node<T>* tempRoot) {
 
       if (tempRoot->getRightNodePtr() != nullptr) {
          // recurse right
-         Insert(data, tempRoot->getRightNodePtr());
+         return Insert(data, tempRoot->getRightNodePtr());
       } else {
          // insert rigth
-         newNode = new Node<T>(data);
+         newNode = new Node<T>(data, tempRoot, false);
          tempRoot->setRightNodePtr(newNode);
       }
    }
@@ -81,7 +81,10 @@ void BinarySearchTree<T>::Print(string prefix, Node<T>* node, bool isLeft) {
 
 template <typename T>
 void BinarySearchTree<T>::Print() {
-   cout << "\nHeight: " << root->getHeight() << "\n\n";
+   cout << "\n[Height: " << root->getHeight() << "]";
+   cout << "\n[Root BF: " << root->getBalanceFactor() << "]\n\n";
+
+   cout << "Tree diagram: \n";
    Print("", root, false);
 }
 

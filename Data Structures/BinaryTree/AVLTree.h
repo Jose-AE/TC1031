@@ -7,7 +7,7 @@ class AVLTree : public BinarySearchTree<T> {
    /* data */
 
   public:
-   void Balance(int lastInsertedData);
+   void Balance(Node<T>* parentRoot);
    AVLTree(/* args */);
    void Insert(T data);
 

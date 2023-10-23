@@ -6,8 +6,13 @@ template <typename T>
 Node<T>::Node() {}
 
 template <typename T>
-Node<T>::Node(T data, Node<T>* leftNodePtr, Node<T>* rightNodePtr)
-    : data(data), leftNodePtr(leftNodePtr), rightNodePtr(rightNodePtr) {}
+Node<T>::Node(T data, Node<T>* parentNodePtr, bool leftChildNode,
+              Node<T>* leftNodePtr, Node<T>* rightNodePtr)
+    : data(data),
+      parentNodePtr(parentNodePtr),
+      leftChildNode(leftChildNode),
+      leftNodePtr(leftNodePtr),
+      rightNodePtr(rightNodePtr) {}
 
 template <typename T>
 T Node<T>::getData() {
@@ -30,6 +35,11 @@ Node<T>* Node<T>::getLeftNodePtr() {
 }
 
 template <typename T>
+Node<T>* Node<T>::getParentNodePtr() {
+   return parentNodePtr;
+}
+
+template <typename T>
 void Node<T>::setLeftNodePtr(Node<T>* node) {
    leftNodePtr = node;
 }
@@ -48,8 +58,10 @@ void Node<T>::Print() {
 
 template <typename T>
 int Node<T>::getBalanceFactor() {
+
    int balanceFacor = 0;  // L-R
    if (this->getLeftNodePtr() != nullptr) {
+
       balanceFacor += this->getLeftNodePtr()->getHeight() + 1;
    }
    if (this->getRightNodePtr() != nullptr) {
@@ -61,12 +73,16 @@ int Node<T>::getBalanceFactor() {
 
 template <typename T>
 int Node<T>::getHeight() {
+
    // if single node
    if (leftNodePtr == nullptr && rightNodePtr == nullptr) {
+
       return 0;
    }
+
    // if there are 2 child nodes (L and R)
    else if (leftNodePtr != nullptr && rightNodePtr != nullptr) {
+
       return max(leftNodePtr->getHeight(), rightNodePtr->getHeight()) + 1;
    }
    // if only one child node
@@ -75,6 +91,11 @@ int Node<T>::getHeight() {
                                                  : rightNodePtr->getHeight());
       return child_height + 1;
    }
+}
+
+template <typename T>
+bool Node<T>::isLeftChildNode() {
+   return leftChildNode;
 }
 
 /// templates

@@ -5,7 +5,7 @@ using namespace std;
 int main(int argc, char const *argv[]) {
    AVLTree<int> tree;
 
-   int numbersToInsert[] = {1, 2, 3, 4, 5};  //{10, 15, 20, 12, 5}
+   int numbersToInsert[] = {-1, 2, 1, 0};  //{10, 15, 20, 12, 5}
 
    for (int number : numbersToInsert) {
       tree.Insert(number);
@@ -13,7 +13,9 @@ int main(int argc, char const *argv[]) {
 
    // tree.setRootPtr(tree.leftRotate(tree.getRootPtr()));
 
-   tree.Print();
+   // tree.Print();
+
+   // cout << tree.getRootPtr()->getRightNodePtr()->getLeftNodePtr();
 
    // if (tree.getRootPtr()->getLeftNodePtr() != nullptr) {
    //    cout << tree.getRootPtr()->getLeftNodePtr()->getData() << endl;

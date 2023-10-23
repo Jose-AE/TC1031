@@ -1,34 +1,31 @@
 #include "AVLTree.h"
 
 template <typename T>
-void AVLTree<T>::Balance(int lastInsertedData) {
-   // bf = L-R
-   // if bf > 1  right rot
-   // if bf < -1  left rot
-
+void AVLTree<T>::Balance(Node<T>* parentRoot) {
    //---check what rot to do
-   int bf = this->root->getBalanceFactor();
-   // cout << "Balance factor: " << bf << endl;
-
-   Node<T>* rootLeftNodePtr = this->root->getLeftNodePtr();
-   Node<T>* rootRightNodePtr = this->root->getRightNodePtr();
+   int bf = parentRoot->getBalanceFactor();
+   Node<T>* rootLeftNodePtr = parentRoot->getLeftNodePtr();
+   Node<T>* rootRightNodePtr = parentRoot->getRightNodePtr();
 
    if (rootRightNodePtr != nullptr) {
 
-      cout << "-----------------\n";
-      cout << "Root BF: " << bf << endl;
-      cout << "RightNodePtr BF: " << rootRightNodePtr->getBalanceFactor()
-           << endl;
-
-      /*
-      if   root.bf < -1  and root.right.bf == -1
-      --Left rot
-      */
-
-      if (bf < -1 && rootRightNodePtr->getBalanceFactor() == -1) {
+      if (bf < -1 && rootRightNodePtr->getBalanceFactor() <= -1) {
          // leeft rot
-         cout << "left rot" << endl;
-         this->root = leftRotate(this->root);
+         cout << "[left rot]" << endl;
+
+         if (parentRoot->getParentNodePtr() != nullptr) {
+
+            if (parentRoot->isLeftChildNode()) {
+               parentRoot->getParentNodePtr()->setLeftNodePtr(
+                   leftRotate(parentRoot));
+            } else {
+               parentRoot->getParentNodePtr()->setRightNodePtr(
+                   leftRotate(parentRoot));
+            }
+         } else {
+            // if its rotating the root node
+            this->root = leftRotate(this->root);
+         }
       }
 
       /*
@@ -36,27 +33,51 @@ void AVLTree<T>::Balance(int lastInsertedData) {
            --Right left rot
       */
 
-      if (bf < -1 && rootRightNodePtr->getBalanceFactor() == 1) {
+      if (bf < -1 && rootRightNodePtr->getBalanceFactor() >= 1) {
          // Right left rot
-         cout << "Right left rot" << endl;
+         cout << "[Right left rot]" << endl;
+
+         parentRoot->setRightNodePtr(rightRotate(rootRightNodePtr));
+         // Now, perform the left rotation on the root
+         if (parentRoot->getParentNodePtr() != nullptr) {
+            if (parentRoot->isLeftChildNode()) {
+               parentRoot->getParentNodePtr()->setLeftNodePtr(
+                   leftRotate(parentRoot));
+            } else {
+               parentRoot->getParentNodePtr()->setRightNodePtr(
+                   leftRotate(parentRoot));
+            }
+         } else {
+            // If it's rotating the root node
+            this->root = leftRotate(parentRoot);
+         }
       }
    }
 
    if (rootLeftNodePtr != nullptr) {  // if there is right node
-
-      cout << "-----------------\n";
-      cout << "Root BF: " << bf << endl;
-      cout << "LeftNodePtr BF: " << rootLeftNodePtr->getBalanceFactor() << endl;
-
       /*
       if root.bf > 1 and root.left.bf == 1
       --right rot
       */
 
-      if (bf > 1 && rootLeftNodePtr->getBalanceFactor() == 1) {
+      if (bf > 1 && rootLeftNodePtr->getBalanceFactor() >= 1) {
          // right rot
-         this->root = rightRotate(this->root);
-         cout << "Right rot" << endl;
+         // this->root = rightRotate(this->root);
+         cout << "[Right rot]" << endl;
+
+         if (parentRoot->getParentNodePtr() != nullptr) {
+
+            if (parentRoot->isLeftChildNode()) {
+               parentRoot->getParentNodePtr()->setLeftNodePtr(
+                   rightRotate(parentRoot));
+            } else {
+               parentRoot->getParentNodePtr()->setRightNodePtr(
+                   rightRotate(parentRoot));
+            }
+         } else {
+            // if its rotating the root node
+            this->root = rightRotate(this->root);
+         }
       }
 
       /*
@@ -64,13 +85,26 @@ void AVLTree<T>::Balance(int lastInsertedData) {
          --left right rot
       */
 
-      if (bf > 1 && rootLeftNodePtr->getBalanceFactor() == -1) {
+      if (bf > 1 && rootLeftNodePtr->getBalanceFactor() <= -1) {
          // left right rot
-         cout << "left right rot" << endl;
+         cout << "[left right rot]" << endl;
+
+         parentRoot->setLeftNodePtr(leftRotate(rootLeftNodePtr));
+         // Now, perform the right rotation on the root
+         if (parentRoot->getParentNodePtr() != nullptr) {
+            if (parentRoot->isLeftChildNode()) {
+               parentRoot->getParentNodePtr()->setLeftNodePtr(
+                   rightRotate(parentRoot));
+            } else {
+               parentRoot->getParentNodePtr()->setRightNodePtr(
+                   rightRotate(parentRoot));
+            }
+         } else {
+            // If it's rotating the root node
+            this->root = rightRotate(parentRoot);
+         }
       }
    }
-
-   cout << "-----------------\n";
 }
 
 template <typename T>
@@ -78,10 +112,20 @@ AVLTree<T>::AVLTree() {}
 
 template <typename T>
 void AVLTree<T>::Insert(T data) {
-   // call parent class insert method
-   BinarySearchTree<T>::Insert(data);
+   Node<T>* insertedNode = BinarySearchTree<T>::Insert(data);
 
-   Balance(data);
+   cout << "\n\n-----inserted: " << data << "--------" << endl;
+
+   if (insertedNode == nullptr) {
+      return;
+   }
+
+   // Go from bottom to top and balance each node
+   while (insertedNode->getParentNodePtr() != nullptr) {
+      insertedNode = insertedNode->getParentNodePtr();
+      Balance(insertedNode);
+   }
+   this->Print();
 }
 
 /**
