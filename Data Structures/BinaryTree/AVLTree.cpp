@@ -40,12 +40,12 @@ void AVLTree<T>::Balance(Node<T>* parentRoot) {
          cout << "[Right left rot to node with data: " << parentRoot->getData()
               << "]";  // 1
 
-         cout << "*";
          parentRoot->setRightNodePtr(rightRotate(rootRightNodePtr));
-         cout << "--";
-         // Now, perform the left rotation on the root
+
+         cout << "Node par:" << parentRoot->getParentNodePtr() << "/*/*/";  // 0
 
          if (parentRoot->getParentNodePtr() != nullptr) {
+
             if (parentRoot->isLeftChildNode()) {
                parentRoot->getParentNodePtr()->setLeftNodePtr(
                    leftRotate(parentRoot));
@@ -53,8 +53,11 @@ void AVLTree<T>::Balance(Node<T>* parentRoot) {
                parentRoot->getParentNodePtr()->setRightNodePtr(
                    leftRotate(parentRoot));
             }
-         } else {
-            // If it's rotating the root node
+         }
+
+         else {
+            cout << "/////Break/////";
+            //  If it's rotating the root node
             this->root = leftRotate(parentRoot);
          }
       }
@@ -130,6 +133,10 @@ void AVLTree<T>::Insert(T data) {
    // Go from bottom to top and balance each node
    while (insertedNode->getParentNodePtr() != nullptr) {
       insertedNode = insertedNode->getParentNodePtr();
+
+      // error-flag   prints 34 and then 1 and then again 34 foreverr
+      cout << insertedNode->getData() << endl;
+
       Balance(insertedNode);
    }
 
@@ -164,13 +171,9 @@ template <typename T>
 Node<T>* AVLTree<T>::leftRotate(Node<T>* node) {
    Node<T>* B = node->getRightNodePtr();
    Node<T>* Y = B->getLeftNodePtr();
-   Y->setParentNodePtr(node);
-   Y->setIsleftChildNode(false);
 
    B->setLeftNodePtr(node);
    node->setRightNodePtr(Y);
-
-   cout << "*left rot*";
 
    return B;
 }
@@ -184,13 +187,10 @@ template <typename T>
 Node<T>* AVLTree<T>::rightRotate(Node<T>* node) {
    Node<T>* B = node->getLeftNodePtr();
    Node<T>* Y = B->getRightNodePtr();
-   Y->setParentNodePtr(node);
-   Y->setIsleftChildNode(false);
 
    B->setRightNodePtr(node);
    node->setLeftNodePtr(Y);
 
-   cout << "*right rot*";
    return B;
 }
 

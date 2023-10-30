@@ -16,25 +16,11 @@ int main(int argc, char const *argv[]) {
       tree.Insert(number);
    }
 
-   // tree.Delete(11);
+   /*
+   To find error search for "error-flag"
 
-   tree.Print();
+   */
 
-   // tree.setRootPtr(tree.leftRotate(tree.getRootPtr()));
-
-   // tree.Print();
-
-   // cout << tree.getRootPtr()->getRightNodePtr()->getLeftNodePtr();
-
-   // if (tree.getRootPtr()->getLeftNodePtr() != nullptr) {
-   //    cout << tree.getRootPtr()->getLeftNodePtr()->getData() << endl;
-
-   // } else
-   //    cout << "nullp";
-
-   // cout << "┌─┴─┐";
-
-   // cout << tree.getRootPtr()->getData();
    cout << "------Program ended------------";
    return 0;
 }

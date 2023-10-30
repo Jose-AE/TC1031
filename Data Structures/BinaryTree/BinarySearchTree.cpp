@@ -16,7 +16,7 @@ Node<T>* BinarySearchTree<T>::Insert(T data, Node<T>* tempRoot) {
    Node<T>* newNode;
 
    if (this->root == nullptr) {
-      newNode = new Node<T>(data, nullptr, false);
+      newNode = new Node<T>(data);
       this->root = newNode;
    }
    if (tempRoot == nullptr) {
@@ -31,7 +31,7 @@ Node<T>* BinarySearchTree<T>::Insert(T data, Node<T>* tempRoot) {
          return Insert(data, tempRoot->getLeftNodePtr());
       } else {
          // insert left
-         newNode = new Node<T>(data, tempRoot, true);
+         newNode = new Node<T>(data);
          tempRoot->setLeftNodePtr(newNode);
       }
    }
@@ -44,7 +44,7 @@ Node<T>* BinarySearchTree<T>::Insert(T data, Node<T>* tempRoot) {
          return Insert(data, tempRoot->getRightNodePtr());
       } else {
          // insert rigth
-         newNode = new Node<T>(data, tempRoot, false);
+         newNode = new Node<T>(data);
          tempRoot->setRightNodePtr(newNode);
       }
    }

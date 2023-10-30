@@ -14,13 +14,17 @@ Node<T>::Node() {}
  * @param rightNodePtr = nullptr
  */
 template <typename T>
-Node<T>::Node(T data, Node<T>* parentNodePtr, bool leftChildNode,
-              Node<T>* leftNodePtr, Node<T>* rightNodePtr)
-    : data(data),
-      parentNodePtr(parentNodePtr),
-      leftChildNode(leftChildNode),
-      leftNodePtr(leftNodePtr),
-      rightNodePtr(rightNodePtr) {}
+Node<T>::Node(T data, Node<T>* leftNodePtr, Node<T>* rightNodePtr)
+    : data(data), leftNodePtr(leftNodePtr), rightNodePtr(rightNodePtr) {
+
+   if (leftNodePtr != nullptr) {
+      leftNodePtr->setParentNodePtr(this);
+   }
+
+   if (rightNodePtr != nullptr) {
+      rightNodePtr->setParentNodePtr(this);
+   }
+}
 
 template <typename T>
 T Node<T>::getData() {
@@ -48,23 +52,24 @@ Node<T>* Node<T>::getParentNodePtr() {
 }
 
 template <typename T>
-void Node<T>::setParentNodePtr(Node<T>* newParentNodePtr) {
-   this->parentNodePtr = newParentNodePtr;
-}
-
-template <typename T>
-void Node<T>::setIsleftChildNode(bool arg) {
-   leftChildNode = arg;
-}
-
-template <typename T>
 void Node<T>::setLeftNodePtr(Node<T>* node) {
    leftNodePtr = node;
+   if (leftNodePtr != nullptr) {
+      leftNodePtr->setParentNodePtr(this);
+   }
 }
 
 template <typename T>
 void Node<T>::setRightNodePtr(Node<T>* node) {
    rightNodePtr = node;
+   if (rightNodePtr != nullptr) {
+      rightNodePtr->setParentNodePtr(this);  // Corrected this line
+   }
+}
+
+template <typename T>
+void Node<T>::setParentNodePtr(Node<T>* node) {
+   parentNodePtr = node;
 }
 
 template <typename T>
@@ -113,7 +118,9 @@ int Node<T>::getHeight() {
 
 template <typename T>
 bool Node<T>::isLeftChildNode() {
-   return leftChildNode;
+   if (this->getParentNodePtr() == nullptr) return false;
+
+   return this->getParentNodePtr()->getData() > this->getData();
 }
 
 /// templates
