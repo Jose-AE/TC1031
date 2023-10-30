@@ -11,7 +11,8 @@ void AVLTree<T>::Balance(Node<T>* parentRoot) {
 
       if (bf < -1 && rootRightNodePtr->getBalanceFactor() <= -1) {
          // leeft rot
-         cout << "[left rot]" << endl;
+         cout << "[left rot to node with data: " << parentRoot->getData() << "]"
+              << endl;
 
          if (parentRoot->getParentNodePtr() != nullptr) {
 
@@ -19,6 +20,7 @@ void AVLTree<T>::Balance(Node<T>* parentRoot) {
                parentRoot->getParentNodePtr()->setLeftNodePtr(
                    leftRotate(parentRoot));
             } else {
+
                parentRoot->getParentNodePtr()->setRightNodePtr(
                    leftRotate(parentRoot));
             }
@@ -35,10 +37,14 @@ void AVLTree<T>::Balance(Node<T>* parentRoot) {
 
       if (bf < -1 && rootRightNodePtr->getBalanceFactor() >= 1) {
          // Right left rot
-         cout << "[Right left rot]" << endl;
+         cout << "[Right left rot to node with data: " << parentRoot->getData()
+              << "]";  // 1
 
+         cout << "*";
          parentRoot->setRightNodePtr(rightRotate(rootRightNodePtr));
+         cout << "--";
          // Now, perform the left rotation on the root
+
          if (parentRoot->getParentNodePtr() != nullptr) {
             if (parentRoot->isLeftChildNode()) {
                parentRoot->getParentNodePtr()->setLeftNodePtr(
@@ -115,6 +121,7 @@ void AVLTree<T>::Insert(T data) {
    Node<T>* insertedNode = BinarySearchTree<T>::Insert(data);
 
    cout << "\n\n-----inserted: " << data << "--------" << endl;
+   cout << "Inserted node parent: " << insertedNode->getParentNodePtr() << endl;
 
    if (insertedNode == nullptr) {
       return;
@@ -125,6 +132,26 @@ void AVLTree<T>::Insert(T data) {
       insertedNode = insertedNode->getParentNodePtr();
       Balance(insertedNode);
    }
+
+   this->Print();
+}
+
+template <typename T>
+void AVLTree<T>::Delete(T data) {
+   Node<T>* deletedNodeChildPtr = BinarySearchTree<T>::Delete(data);
+
+   cout << "\n\n-----Deleted: " << data << "--------" << endl;
+
+   if (deletedNodeChildPtr == nullptr) {
+      return;
+   }
+
+   // Go from bottom to top and balance each node
+   while (deletedNodeChildPtr->getParentNodePtr() != nullptr) {
+      deletedNodeChildPtr = deletedNodeChildPtr->getParentNodePtr();
+      Balance(deletedNodeChildPtr);
+   }
+
    this->Print();
 }
 
@@ -137,9 +164,13 @@ template <typename T>
 Node<T>* AVLTree<T>::leftRotate(Node<T>* node) {
    Node<T>* B = node->getRightNodePtr();
    Node<T>* Y = B->getLeftNodePtr();
+   Y->setParentNodePtr(node);
+   Y->setIsleftChildNode(false);
 
    B->setLeftNodePtr(node);
    node->setRightNodePtr(Y);
+
+   cout << "*left rot*";
 
    return B;
 }
@@ -153,10 +184,13 @@ template <typename T>
 Node<T>* AVLTree<T>::rightRotate(Node<T>* node) {
    Node<T>* B = node->getLeftNodePtr();
    Node<T>* Y = B->getRightNodePtr();
+   Y->setParentNodePtr(node);
+   Y->setIsleftChildNode(false);
 
    B->setRightNodePtr(node);
    node->setLeftNodePtr(Y);
 
+   cout << "*right rot*";
    return B;
 }
 

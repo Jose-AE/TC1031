@@ -10,6 +10,7 @@ class AVLTree : public BinarySearchTree<T> {
    void Balance(Node<T>* parentRoot);
    AVLTree(/* args */);
    void Insert(T data);
+   void Delete(T data);
 
    Node<T>* leftRotate(Node<T>* node);
    Node<T>* rightRotate(Node<T>* node);

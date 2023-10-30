@@ -53,8 +53,144 @@ Node<T>* BinarySearchTree<T>::Insert(T data, Node<T>* tempRoot) {
 }
 
 template <typename T>
+Node<T>* BinarySearchTree<T>::Delete(T data, Node<T>* tempRoot) {
+   // for first time calling function from outside
+   if (tempRoot == nullptr) {
+      tempRoot = this->root;
+   };
+
+   // if tree is empty return
+   if (this->root == nullptr) {
+      return nullptr;
+   }
+
+   // if on a leaf and no data was found break
+   if (tempRoot->getLeftNodePtr() == nullptr &&
+       tempRoot->getRightNodePtr() == nullptr && tempRoot->getData() != data) {
+      return nullptr;
+   }
+
+   // if temp root has data delete temproot and subtitute it
+   if (tempRoot->getData() == data) {
+
+      Node<T>* deletedNodeParentPtr = tempRoot->getParentNodePtr();  // 34
+
+      // if leaf node
+      if (tempRoot->getRightNodePtr() == nullptr &&
+          tempRoot->getLeftNodePtr() == nullptr) {
+
+         // if root of tree
+         if (tempRoot->getParentNodePtr() == nullptr) {
+            delete tempRoot;
+            this->root = nullptr;
+         } else {
+            if (tempRoot->isLeftChildNode())
+               tempRoot->getParentNodePtr()->setLeftNodePtr(nullptr);
+            else
+               tempRoot->getParentNodePtr()->setRightNodePtr(nullptr);
+
+            delete tempRoot;
+         }
+
+      }
+      // when it  has 2 childs
+      else if (tempRoot->getRightNodePtr() != nullptr &&
+               tempRoot->getLeftNodePtr() != nullptr) {
+
+         Node<T>* maxNodePtrInTempRoot =
+             getMaxDataNodePtr(tempRoot->getLeftNodePtr());
+
+         cout << maxNodePtrInTempRoot->getData() << "*/*/*/*";  // 10
+
+         tempRoot->setData(maxNodePtrInTempRoot->getData());
+
+         // delete leaf
+         Node<T>* tempParentNode = maxNodePtrInTempRoot->getParentNodePtr();
+
+         if (maxNodePtrInTempRoot->isLeftChildNode())
+            tempParentNode->setLeftNodePtr(nullptr);
+         else
+            tempParentNode->setRightNodePtr(nullptr);
+
+         delete maxNodePtrInTempRoot;
+
+         return tempParentNode;
+
+      }
+      // when node to delete has only  1 child
+      else {
+         Node<T>* deletedNodeParentPtr = tempRoot->getParentNodePtr();
+
+         // if its a right child
+         if (tempRoot->getRightNodePtr() != nullptr) {
+
+            if (tempRoot->isLeftChildNode())
+               deletedNodeParentPtr->setLeftNodePtr(
+                   tempRoot->getRightNodePtr());
+            else
+               deletedNodeParentPtr->setRightNodePtr(
+                   tempRoot->getRightNodePtr());
+
+            delete tempRoot;
+            return deletedNodeParentPtr->getLeftNodePtr();
+         }
+         // if left child
+         else {
+            if (tempRoot->isLeftChildNode())
+               deletedNodeParentPtr->setLeftNodePtr(tempRoot->getLeftNodePtr());
+            else
+               deletedNodeParentPtr->setRightNodePtr(
+                   tempRoot->getLeftNodePtr());
+
+            delete tempRoot;
+            return deletedNodeParentPtr->getLeftNodePtr();
+         }
+      }
+   }
+
+   // if should send left
+   if (data < tempRoot->getData() && tempRoot->getLeftNodePtr() != nullptr) {
+      return Delete(data, tempRoot->getLeftNodePtr());
+   }
+
+   // if should send right
+   if (data > tempRoot->getData() && tempRoot->getRightNodePtr() != nullptr) {
+      return Delete(data, tempRoot->getRightNodePtr());
+   }
+
+   // in case it somehow reaches this point, return to break
+   return nullptr;
+}
+
+template <typename T>
 Node<T>* BinarySearchTree<T>::getRootPtr() {
    return root;
+}
+
+template <typename T>
+Node<T>* BinarySearchTree<T>::getMinDataNodePtr(Node<T>* startNodePtr) {
+   if (startNodePtr == nullptr) {
+      startNodePtr = this->root;
+   }
+
+   if (startNodePtr->getLeftNodePtr() != nullptr) {
+      return getMinDataNodePtr(startNodePtr->getLeftNodePtr());
+   } else {
+      return startNodePtr;
+   }
+}
+
+template <typename T>
+Node<T>* BinarySearchTree<T>::getMaxDataNodePtr(Node<T>* startNodePtr) {
+   if (startNodePtr == nullptr) {
+      startNodePtr = this->root;
+   }
+
+   if (startNodePtr->getRightNodePtr() != nullptr) {
+      return getMaxDataNodePtr(startNodePtr->getRightNodePtr());
+   } else {
+      return startNodePtr;
+   }
 }
 
 template <typename T>

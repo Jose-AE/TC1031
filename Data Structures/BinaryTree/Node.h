@@ -19,6 +19,8 @@ class Node {
    Node<T>* getRightNodePtr();
    Node<T>* getLeftNodePtr();
    Node<T>* getParentNodePtr();
+   void setParentNodePtr(Node<T>* newParentNodePtr);
+   void setIsleftChildNode(bool arg);
 
    void setLeftNodePtr(Node<T>* node);
    void setRightNodePtr(Node<T>* node);

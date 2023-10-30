@@ -5,6 +5,14 @@ using namespace std;
 template <typename T>
 Node<T>::Node() {}
 
+/**
+ * @brief
+ * @param data
+ * @param parentNodePtr
+ * @param leftChildNode is it a left child?
+ * @param leftNodePtr = nullptr
+ * @param rightNodePtr = nullptr
+ */
 template <typename T>
 Node<T>::Node(T data, Node<T>* parentNodePtr, bool leftChildNode,
               Node<T>* leftNodePtr, Node<T>* rightNodePtr)
@@ -37,6 +45,16 @@ Node<T>* Node<T>::getLeftNodePtr() {
 template <typename T>
 Node<T>* Node<T>::getParentNodePtr() {
    return parentNodePtr;
+}
+
+template <typename T>
+void Node<T>::setParentNodePtr(Node<T>* newParentNodePtr) {
+   this->parentNodePtr = newParentNodePtr;
+}
+
+template <typename T>
+void Node<T>::setIsleftChildNode(bool arg) {
+   leftChildNode = arg;
 }
 
 template <typename T>
