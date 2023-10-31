@@ -74,9 +74,31 @@ void Node<T>::setParentNodePtr(Node<T>* node) {
 
 template <typename T>
 void Node<T>::Print() {
-   cout << "Data: " << data;
-   cout << "LeftPtr: " << leftNodePtr;
-   cout << "RightPtr: " << rightNodePtr;
+   cout << "Data: " << data << endl;
+
+   cout << (isLeftChildNode() == 1 ? "Left Child" : "RightChild") << endl;
+
+   if (leftNodePtr != nullptr) {
+      cout << "LeftData: " << leftNodePtr->getData()
+           << endl;  // Output the data of the left node
+   } else {
+      cout << "LeftData: nullptr\n";  // Output that the left node is nullptr
+   }
+
+   if (rightNodePtr != nullptr) {
+      cout << "RightData: " << rightNodePtr->getData()
+           << endl;  // Output the data of the right node
+   } else {
+      cout << "RightData: nullptr\n";  // Output that the right node is nullptr
+   }
+
+   if (parentNodePtr != nullptr) {
+      cout << "ParentData: " << parentNodePtr->getData()
+           << endl;  // Output the data of the parent node
+   } else {
+      cout << "ParentData: nullptr\n";  // Output that the parent node is
+                                        // nullptr
+   }
 }
 
 template <typename T>

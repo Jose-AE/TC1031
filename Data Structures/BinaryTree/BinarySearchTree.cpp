@@ -17,11 +17,16 @@ Node<T>* BinarySearchTree<T>::Insert(T data, Node<T>* tempRoot) {
 
    if (this->root == nullptr) {
       newNode = new Node<T>(data);
-      this->root = newNode;
+      this->setRootPtr(newNode);
    }
    if (tempRoot == nullptr) {
       tempRoot = this->root;
    };
+
+   // dont insert if already on tree
+   if (tempRoot->getData() == data) {
+      return nullptr;
+   }
 
    // if should send left
    if (data < tempRoot->getData()) {
@@ -64,16 +69,10 @@ Node<T>* BinarySearchTree<T>::Delete(T data, Node<T>* tempRoot) {
       return nullptr;
    }
 
-   // if on a leaf and no data was found break
-   if (tempRoot->getLeftNodePtr() == nullptr &&
-       tempRoot->getRightNodePtr() == nullptr && tempRoot->getData() != data) {
-      return nullptr;
-   }
-
    // if temp root has data delete temproot and subtitute it
    if (tempRoot->getData() == data) {
 
-      Node<T>* deletedNodeParentPtr = tempRoot->getParentNodePtr();  // 34
+      Node<T>* nodeToDeleteParentPtr = tempRoot->getParentNodePtr();  // 34
 
       // if leaf node
       if (tempRoot->getRightNodePtr() == nullptr &&
@@ -81,28 +80,23 @@ Node<T>* BinarySearchTree<T>::Delete(T data, Node<T>* tempRoot) {
 
          // if root of tree
          if (tempRoot->getParentNodePtr() == nullptr) {
-            delete tempRoot;
-            this->root = nullptr;
+            this->setRootPtr(nullptr);
+         } else if (tempRoot->isLeftChildNode()) {
+            tempRoot->getParentNodePtr()->setLeftNodePtr(nullptr);
          } else {
-            if (tempRoot->isLeftChildNode())
-               tempRoot->getParentNodePtr()->setLeftNodePtr(nullptr);
-            else
-               tempRoot->getParentNodePtr()->setRightNodePtr(nullptr);
-
-            delete tempRoot;
+            tempRoot->getParentNodePtr()->setRightNodePtr(nullptr);
          }
-
+         delete tempRoot;
+         return nodeToDeleteParentPtr;
       }
       // when it  has 2 childs
       else if (tempRoot->getRightNodePtr() != nullptr &&
                tempRoot->getLeftNodePtr() != nullptr) {
 
          Node<T>* maxNodePtrInTempRoot =
-             getMaxDataNodePtr(tempRoot->getLeftNodePtr());
+             getMaxDataNodePtr(tempRoot->getLeftNodePtr());  // 95
 
-         cout << maxNodePtrInTempRoot->getData() << "*/*/*/*";  // 10
-
-         tempRoot->setData(maxNodePtrInTempRoot->getData());
+         // cout << "max: " << maxNodePtrInTempRoot->getData() << endl;
 
          // delete leaf
          Node<T>* tempParentNode = maxNodePtrInTempRoot->getParentNodePtr();
@@ -112,54 +106,58 @@ Node<T>* BinarySearchTree<T>::Delete(T data, Node<T>* tempRoot) {
          else
             tempParentNode->setRightNodePtr(nullptr);
 
+         // Switch values and delete
+         tempRoot->setData(maxNodePtrInTempRoot->getData());
          delete maxNodePtrInTempRoot;
 
-         return tempParentNode;
+         // maxNodePtrInTempRoot->Print();
+
+         return getMaxDataNodePtr(tempParentNode);
 
       }
       // when node to delete has only  1 child
       else {
-         Node<T>* deletedNodeParentPtr = tempRoot->getParentNodePtr();
-
          // if its a right child
          if (tempRoot->getRightNodePtr() != nullptr) {
 
             if (tempRoot->isLeftChildNode())
-               deletedNodeParentPtr->setLeftNodePtr(
+               nodeToDeleteParentPtr->setLeftNodePtr(
                    tempRoot->getRightNodePtr());
             else
-               deletedNodeParentPtr->setRightNodePtr(
+               nodeToDeleteParentPtr->setRightNodePtr(
                    tempRoot->getRightNodePtr());
 
             delete tempRoot;
-            return deletedNodeParentPtr->getLeftNodePtr();
+            return nodeToDeleteParentPtr->getRightNodePtr();
          }
          // if left child
          else {
             if (tempRoot->isLeftChildNode())
-               deletedNodeParentPtr->setLeftNodePtr(tempRoot->getLeftNodePtr());
+               nodeToDeleteParentPtr->setLeftNodePtr(
+                   tempRoot->getLeftNodePtr());
             else
-               deletedNodeParentPtr->setRightNodePtr(
+               nodeToDeleteParentPtr->setRightNodePtr(
                    tempRoot->getLeftNodePtr());
 
             delete tempRoot;
-            return deletedNodeParentPtr->getLeftNodePtr();
+            return nodeToDeleteParentPtr->getLeftNodePtr();
          }
       }
    }
-
    // if should send left
-   if (data < tempRoot->getData() && tempRoot->getLeftNodePtr() != nullptr) {
+   else if (data < tempRoot->getData() &&
+            tempRoot->getLeftNodePtr() != nullptr) {
       return Delete(data, tempRoot->getLeftNodePtr());
    }
-
    // if should send right
-   if (data > tempRoot->getData() && tempRoot->getRightNodePtr() != nullptr) {
+   else if (data > tempRoot->getData() &&
+            tempRoot->getRightNodePtr() != nullptr) {
       return Delete(data, tempRoot->getRightNodePtr());
    }
-
-   // in case it somehow reaches this point, return to break
-   return nullptr;
+   // if on a leaf and no data was found break
+   else {
+      return nullptr;
+   }
 }
 
 template <typename T>
@@ -196,6 +194,7 @@ Node<T>* BinarySearchTree<T>::getMaxDataNodePtr(Node<T>* startNodePtr) {
 template <typename T>
 void BinarySearchTree<T>::setRootPtr(Node<T>* node) {
    root = node;
+   if (root != nullptr) root->setParentNodePtr(nullptr);
 }
 
 template <typename T>
@@ -203,14 +202,14 @@ void BinarySearchTree<T>::Print(string prefix, Node<T>* node, bool isLeft) {
    if (node != nullptr) {
       cout << prefix;
 
-      cout << (isLeft ? "|--[" : "|--[");  // └──
+      cout << (isLeft ? "├──" : "└──");  // └──
 
       // print the value of the node
       cout << node->getData() << std::endl;
 
       // enter the next tree level - left and right branch
-      Print(prefix + (isLeft ? "|   " : "    "), node->getLeftNodePtr(), true);
-      Print(prefix + (isLeft ? "|   " : "    "), node->getRightNodePtr(),
+      Print(prefix + (isLeft ? "│   " : "    "), node->getLeftNodePtr(), true);
+      Print(prefix + (isLeft ? "│   " : "    "), node->getRightNodePtr(),
             false);
    }
 }
