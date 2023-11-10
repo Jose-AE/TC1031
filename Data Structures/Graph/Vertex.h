@@ -1,5 +1,5 @@
 #pragma once
-
+#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -11,7 +11,7 @@ class Vertex {
 
   public:
    Vertex(T data);
-   void addAdj(Vertex<T> data);
+   void addAdj(Vertex<T> vertex);
    T getData();
    vector<Vertex<T>> getAdj();
    void print();

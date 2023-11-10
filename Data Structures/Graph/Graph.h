@@ -13,5 +13,6 @@ class Graph {
 
   public:
    Graph();
-   void addVertex(T data, const initializer_list<T>& adj);
+   void addVertex(T data, const initializer_list<T>& adj = {});
+   void print();
 };
