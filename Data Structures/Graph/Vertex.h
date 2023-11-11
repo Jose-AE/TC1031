@@ -7,12 +7,15 @@ template <typename T>
 class Vertex {
   private:
    T data;
-   vector<Vertex<T>> adj;
+   vector<Vertex<T>*> adjPtrs;
+   bool visited = false;
 
   public:
    Vertex(T data);
-   void addAdj(Vertex<T> vertex);
-   T getData();
-   vector<Vertex<T>> getAdj();
+   void addAdjPtr(Vertex<T>* vertexPtr);
+   T& getData();
+   vector<Vertex<T>*> getAdjPtrs();
    void print();
+   void setVisited(bool isVisited);
+   bool getVisited();
 };
