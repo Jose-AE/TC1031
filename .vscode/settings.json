@@ -46,6 +46,11 @@
     "xstring": "cpp",
     "sstream": "cpp",
     "fstream": "cpp",
-    "xiosbase": "cpp"
+    "xiosbase": "cpp",
+    "format": "cpp",
+    "ranges": "cpp",
+    "span": "cpp",
+    "xlocale": "cpp",
+    "xutility": "cpp"
   }
 }
