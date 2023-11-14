@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <queue>
+#include <stack>
 #include <vector>
 #include "Vertex.h"
 
@@ -17,5 +18,6 @@ class Graph {
    void addVertex(T data, const initializer_list<T>& adj = {});
    void print();
    void resetVisited();
-   void bfs();
+   void bfs(T target = T());
+   void dfs(T target = T());
 };

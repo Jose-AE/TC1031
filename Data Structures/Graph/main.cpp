@@ -10,6 +10,7 @@ int main(int argc, char const *argv[]) {
 
    graph.print();
    graph.bfs();
+   graph.dfs();
 
    return 0;
 }

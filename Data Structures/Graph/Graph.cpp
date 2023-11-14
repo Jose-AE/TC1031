@@ -44,7 +44,7 @@ void Graph<T>::resetVisited() {
 }
 
 template <typename T>
-void Graph<T>::bfs() {
+void Graph<T>::bfs(T target) {
    queue<Vertex<T>*> vertexPtrQueue;
 
    vertexPtrQueue.push(vertices[0]);  // add first vertex to queue
@@ -65,6 +65,38 @@ void Graph<T>::bfs() {
       cout << currentVertex->getData() << endl;
 
       vertexPtrQueue.pop();
+   }
+
+   resetVisited();
+}
+
+template <typename T>
+void Graph<T>::dfs(T target) {
+
+   stack<Vertex<T>*> vertexPtrStack;
+   bool foundTarget = false;
+
+   vertexPtrStack.push(vertices[0]);
+   vertices[0]->setVisited(true);
+
+   cout << "\n---[DFS]---\n";
+
+   while (!vertexPtrStack.empty()) {
+      Vertex<T>* currentVertex = vertexPtrStack.top();
+      cout << currentVertex->getData() << endl;
+      vertexPtrStack.pop();
+
+      for (Vertex<T>* neighbor : currentVertex->getAdjPtrs()) {
+         if (neighbor->getVisited() == false) {
+            neighbor->setVisited(true);
+            vertexPtrStack.push(neighbor);
+         }
+      }
+
+      // if searching for target break on found
+      if (target != T()) {
+         if (currentVertex->getData() == target) break;
+      }
    }
 
    resetVisited();
