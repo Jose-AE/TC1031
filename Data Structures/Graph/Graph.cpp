@@ -65,6 +65,11 @@ void Graph<T>::bfs(T target) {
       cout << currentVertex->getData() << endl;
 
       vertexPtrQueue.pop();
+
+      // if searching for target break on found
+      if (target != T()) {
+         if (currentVertex->getData() == target) break;
+      }
    }
 
    resetVisited();
