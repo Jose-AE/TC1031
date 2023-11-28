@@ -504,3 +504,94 @@ class Deque:
 ```
 
 </blockquote>
+
+
+
+<blockquote>
+
+<b>Binary Search Tree</b>
+
+<img src="https://i.imgur.com/epXOS13.png" alt="drawing" width="800"/>
+
+A Binary Search Tree (BST) is a binary tree data structure that has the following properties:
+
+**Binary Tree Structure:**
+
+- Each node in a BST has at most two children: a left child and a right child.
+- These children are themselves the roots of binary subtrees.
+
+
+**Ordering Property:**
+- For each node n, all nodes in its left subtree have values less than n's value.
+- For each node n, all nodes in its right subtree have values greater than n's value.
+
+
+This ordering property ensures that for any given node in the tree, all nodes in its left subtree are smaller, and all nodes in its right subtree are larger.
+
+
+**Operations on Binary Search Trees:**
+
+
+- **Search:**
+To search for a key in the tree, you start at the root node and compare the key with the current node's key. If they match, you've found the key. If the key is smaller, you move to the left subtree; if it's larger, you move to the right subtree. This process continues until you find the key or reach a empty subtree, indicating that the key is not present.
+
+
+- **Insertion:**
+To insert a new key into the tree, you start at the root and compare the key to be inserted with the current node's key. If the key is smaller, you move to the left subtree; if it's larger, you move to the right subtree. This process is repeated until you find an empty subtree where you can insert the new node.
+
+- **Deletion:**
+Deleting a node from a BST involves three cases:
+   - If the node has no children, simply remove it.
+   - If the node has one child, you can replace the node with its child.
+   - If the node has two children, you can either find the node's in-order predecessor (the largest node in its left subtree) or in-order successor (the smallest node in its right subtree), replace the node's key with the predecessor or successor key, and then delete the predecessor or successor.
+
+        <img src="https://i.imgur.com/n2fg60O.png" alt="drawing" width="400"/>
+
+
+</blockquote>
+
+
+
+
+
+
+<blockquote>
+
+<b> AVL Tree</b>
+
+<img src="https://i.imgur.com/LGZ42Py.png" alt="drawing" width="800"/>
+
+An AVL tree (named after its inventors Adelson-Velsky and Landis) is a self-balancing binary search tree. The balance is maintained by ensuring that the height difference between the left and right subtrees of any node (called the balance factor) is at most 1.
+
+
+**Node Balance Factor:** 
+It is the height of the right subtree minus the height of the left subtree. The balance factor can be -1, 0, or 1.
+
+**Binary Search Tree Property:** The AVL tree must maintain the binary search tree property, where all nodes in the left subtree have keys less than the node's key, and all nodes in the right subtree have keys greater than the node's key.
+
+
+To ensure that the tree remains balanced after insertions and deletions, rotations are performed. There are four possible rotations:
+
+- **Left Rotation (LL Rotation):** This rotation is performed when the balance factor of a node becomes greater than 1. It involves a rightward rotation to restore balance.
+
+    <img src="https://i.imgur.com/hdLDad8.png" alt="drawing" width="400"/>
+
+
+- **Right Rotation (RR Rotation):** This rotation is performed when the balance factor of a node becomes less than -1. It involves a leftward rotation to restore balance.
+
+    <img src="https://i.imgur.com/gqy4uyv.png" alt="drawing" width="400"/>
+
+- **Left-Right Rotation (LR Rotation):** This is a combination of left and right rotations. It is performed when the balance factor of the left child of a node becomes less than 0, and the balance factor of the left child's right child is greater than or equal to 0.
+
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221229131629/avl33-(1)-768.png" alt="drawing" width="400"/>
+
+- **Right-Left Rotation (RL Rotation):** This is a combination of right and left rotations. It is performed when the balance factor of the right child of a node becomes greater than 0, and the balance factor of the right child's left child is less than or equal to 0.
+
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221229131517/avl44-(1)-768.png" alt="drawing" width="400"/>
+
+The idea behind these rotations is to maintain balance during insertions and deletions, ensuring that the height of the tree remains logarithmic. The AVL tree guarantees that the height of the tree is O(log n), where n is the number of nodes.
+
+
+
+
+</blockquote>
