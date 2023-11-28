@@ -595,3 +595,74 @@ The idea behind these rotations is to maintain balance during insertions and del
 
 
 </blockquote>
+
+
+
+
+<blockquote>
+
+<b>Graph</b>
+
+<img src="https://web.cecs.pdx.edu/~sheard/course/Cs163/Graphics/graph7.png" alt="drawing" width="400"/>
+
+A graph is a versatile and widely used data structure that consists of a set of nodes (or vertices) and a set of edges connecting pairs of nodes. Graphs are used to model relationships and connections between various entities. The entities are represented by nodes, and the relationships between them are represented by edges.
+
+
+**Nodes (Vertices):** Nodes are the fundamental units of a graph, representing entities or points in the graph. Each node can have additional information associated with it, known as attributes.
+
+**Edges:** Edges are connections between pairs of nodes. An edge can be directed or undirected. In a directed graph, edges have a direction from one node to another, while in an undirected graph, edges have no direction and simply connect two nodes.
+
+**Adjacency:** Two nodes are said to be adjacent if there is an edge connecting them. The set of neighbors of a node is the collection of nodes that are directly connected to it.
+
+
+**Representations:**
+ - **Adjacency Matrix:** A two-dimensional matrix where the rows and columns represent nodes, and the entries indicate whether there is an edge between the corresponding nodes.
+    
+    <img src="https://www.cs.mtsu.edu/~xyang/3080/images/adjDirectedGraph.png" alt="drawing" width="400"/>
+
+ - **Adjacency List:** Each node has a list of its adjacent nodes. This representation is often more space-efficient for sparse graphs.
+
+    <img src="https://www.researchgate.net/publication/228563151/figure/fig1/AS:301851523207168@1448978419114/An-example-of-graph-and-its-adjacency-list.png" alt="drawing" width="400"/>
+
+
+**Graph Traversal:** 
+ - **Depth-First Search (DFS)**  DFS explores a graph or tree by going as deep as possible along each branch before backtracking. It uses a stack to keep track of the vertices to be visited.
+    - Start from a source vertex and visit one of its neighbors.
+    - Continue visiting neighbors until you reach a vertex with no unvisited neighbors.
+    - Backtrack to the previous vertex and explore any remaining unvisited neighbors.
+    - Repeat this process until all vertices are visited.
+
+    <img src="https://codeforces.com/predownloaded/8d/be/8dbe5d89e58b67f3d8e4d8e0e8eb3358ba921b28.png" alt="drawing" width="200"/>
+  
+ - **Breadth-First Search (BFS)** BFS explores a graph or tree level by level, visiting all neighbors of a node before moving on to the next level. It uses a queue to keep track of the vertices to be visited.
+    - Start from a source vertex and enqueue it.
+    - Dequeue a vertex, visit it, and enqueue its unvisited neighbors.
+    - Continue this process until the queue is empty.
+   
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Breadth-First-Search-Algorithm.gif?20100504223639" alt="drawing" width="200"/>
+
+
+</blockquote>
+
+
+
+
+
+
+<blockquote>
+
+<b>Hash Table</b>
+
+<img src="https://www.jsmount.com/wp-content/uploads/2021/02/hash-table-structure.png" alt="drawing" width="400"/>
+
+A hash table, also known as a hash map, is a data structure that implements an associative array abstract data type. It is a collection of key-value pairs, where each key is unique, and the corresponding value can be efficiently retrieved using the key. The key is processed through a hash function to determine the index or location in the array where the associated value can be found.
+
+
+**Hash Function:** A hash function is a mathematical function that takes a key as input and produces a fixed-size string of characters, which is typically a hash code or hash value. The purpose of the hash function is to map keys to indices in the array. A good hash function aims to distribute keys uniformly across the array to minimize collisions.
+
+**Collision:** A collision occurs when two or more keys hash to the same index in the array. Since the array has a fixed size, collisions are inevitable. Hash tables use various techniques to handle collisions, and one common approach is to use separate chaining or open addressing.
+
+  - **Separate Chaining:** In this method, each array index contains a linked list or another data structure (like a binary search tree) that stores all the key-value pairs that hash to the same index.
+
+  - **Open Addressing:** In this method, when a collision occurs, the algorithm searches for the next available slot in the array (probing) until an empty slot is found
+</blockquote>
